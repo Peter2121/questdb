@@ -1,4 +1,4 @@
-name: Build-Default
+name: Build-All-FreeBSD
 on: workflow_dispatch
 
 jobs:
