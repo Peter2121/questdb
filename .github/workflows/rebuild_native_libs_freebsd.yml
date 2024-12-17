@@ -40,7 +40,7 @@ jobs:
           sync_files: false
           environment_variables: ASSUME_ALWAYS_YES
           run: |
-            sudo pkg install -y curl cmake gcc git nasm openjdk17 rust
+            sudo pkg install -y curl cmake gcc git nasm openjdk17 rust-nightly
             pkg info
 
       - name: Build C++ library
