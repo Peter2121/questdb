@@ -40,7 +40,7 @@ jobs:
           sync_files: false
           environment_variables: ASSUME_ALWAYS_YES
           run: |
-            sudo pkg install -y curl cmake gcc git nasm openjdk17 rust-nightly
+            sudo pkg install -y curl cmake gcc git nasm openjdk17
             pkg info
 
       - name: Build C++ library
@@ -64,26 +64,6 @@ jobs:
             cmake --build build/release --config Release
             mkdir -p src/main/resources/io/questdb/bin/freebsd-amd64/
             cp target/classes/io/questdb/bin-local/libquestdb.so src/main/resources/io/questdb/bin/freebsd-amd64/
-
-      - name: Build Rust library
-        uses: cross-platform-actions/action@v0.25.0
-        env:
-          ASSUME_ALWAYS_YES: yes
-        with:
-          operating_system: freebsd
-          version: '14.1'
-          architecture: arm64
-          shell: sh
-          cpu_count: 2
-          memory: 4G
-          shutdown_vm: false
-          sync_files: false
-          environment_variables: ASSUME_ALWAYS_YES
-          run: |
-            export JAVA_HOME=/usr/local/openjdk17
-            cd core/rust/qdbr
-            cargo build --release
-            cp target/release/libquestdbr.so ../../src/main/resources/io/questdb/bin/freebsd-amd64/
 
       - name: Shutdown VM
         uses: cross-platform-actions/action@v0.25.0
